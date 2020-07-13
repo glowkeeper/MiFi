@@ -138,10 +138,14 @@ White & grey:
 
 const themeStyles = makeStyles({
   root: {
-    padding: theme.spacing(1),
-    margin: theme.spacing(1),
     background: 'linear-gradient(#FFFFFF, #FFFFFF)',
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
+    height: "100vh",
+    width: "100%"
+  },
+  grid: {
+    height: "100vh",
+    width: "100%"
   },
   logo: {
     padding: theme.spacing(1),
@@ -152,7 +156,8 @@ const themeStyles = makeStyles({
     padding: theme.spacing(2),
     margin: theme.spacing(1),
     textAlign: 'center',
-    background: 'linear-gradient(#27737e, #27737e)'
+    background: 'linear-gradient(#27737e, #27737e)',
+    width: "100%"
   },
   title: {
     padding: theme.spacing(1),
@@ -170,7 +175,9 @@ const themeStyles = makeStyles({
     padding: theme.spacing(2),
     margin: theme.spacing(2),
     color: theme.palette.text.primary,
-    background: 'linear-gradient(#FFFFFF, #FFFFFF)'
+    background: 'linear-gradient(#FFFFFF, #FFFFFF)',
+    height: "50%",
+    width: "100%"
   },
   caption: {
     padding: theme.spacing(1),
@@ -183,7 +190,8 @@ const themeStyles = makeStyles({
     margin: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.primary,
-    background: 'linear-gradient(#27737e, #27737e)'
+    background: 'linear-gradient(#27737e, #27737e)',
+    width: "100%"
   },
   button: {
     padding: theme.spacing(1),
@@ -200,7 +208,7 @@ const themeStyles = makeStyles({
     margin: 0,
     textAlign: 'left',
     background: 'linear-gradient(#ff671e, #ff671e)'
-  }
+  },
 })
 
 export { theme, themeStyles }

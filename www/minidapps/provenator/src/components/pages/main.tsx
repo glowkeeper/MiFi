@@ -3,6 +3,7 @@ import React from 'react'
 import Markdown from 'react-markdown'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
+import { sizing } from '@material-ui/system'
 
 //import { App as AppMenu, Main as MainMenu } from '../menus'
 import { Main as MainMenu } from '../menus'
@@ -19,48 +20,42 @@ export const Main = () => {
   const classes = themeStyles()
 
   return (
-      <div>
-        <Paper className={classes.header} square={true}>
-          <Grid container>
-            <Grid item xs={12} sm={1}>
-                <MainMenu />
-            </Grid>
-            <Grid item xs={12} sm={10}>
-                &nbsp;
-            </Grid>
-            <Grid item xs={12} sm={1}>
-                <img className={classes.logo} src={logo}/>
-            </Grid>
-          </Grid>
-        </Paper>
-        <Paper className={classes.content} square={true}>
-          <Grid container>
-            <Grid item xs={12}>
-                <Grid container>
-                    <Grid item xs={12} sm={3}>
-                        &nbsp;
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Content />
-                    </Grid>
-                    <Grid item xs={12} sm={3}>
-                        &nbsp;
-                    </Grid>
+      <div className={classes.root}>
+        <Grid container className={classes.grid}>
+          <Paper className={classes.header} square={true}>
+            <Grid item container xs={12}>
+                <Grid item xs={1}>
+                    <MainMenu />
+                </Grid>
+                <Grid item xs={10}>
+                    &nbsp;
+                </Grid>
+                <Grid item xs={1}>
+                    <img className={classes.logo} src={logo}/>
                 </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-        <Paper className={classes.footer} square={true}>
-          <Grid container>
-            <Grid item xs={12}>
-              <img className={classes.logo} src={minima}/>
-              <br/>
-              <Markdown escapeHtml={false} source={App.copyright} />
+          </Paper>
+          <Paper className={classes.content} square={true}>
+            <Grid item container xs={12}>
+               <Grid item xs={3}>
+                    &nbsp;
+                </Grid>
+                <Grid item xs={6}>
+                    <Content />
+                </Grid>
+                <Grid item xs={3}>
+                    &nbsp;
+                </Grid>
             </Grid>
-            <Grid item xs={2}>
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+          <Paper className={classes.footer} square={true}>
+                <Grid item xs={12}>
+                  <img className={classes.logo} src={minima}/>
+                  <br/>
+                  <Markdown escapeHtml={false} source={App.copyright} />
+                </Grid>
+          </Paper>
+        </Grid>
       </div>
   )
 }
