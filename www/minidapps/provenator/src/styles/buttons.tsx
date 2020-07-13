@@ -12,7 +12,7 @@ export const Okay = withStyles({
     padding: '6px 12px',
     border: '1px solid',
     lineHeight: 1.5,
-    background:'linear-gradient(#377D82, #377D82)',
+    background:'linear-gradient(#ff671e, #ff671e)',
     backgroundColor: '#878382',
     borderColor: 'indigo',
     fontFamily: [

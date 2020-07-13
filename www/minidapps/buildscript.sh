@@ -22,3 +22,4 @@ cp ./miniwallet/wallet.minidapp ./bin/
 
 zip -r ./bin/tokenator.minidapp tokenator
 
+cd ./provenator && zip -r ../bin/provenator.minidapp ./build

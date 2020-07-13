@@ -8,9 +8,9 @@
     "url": "git+https://github.com/glowkeeper/mccs-alpha-api-ui"
   },
   "scripts": {
-    "compile": "./node_modules/.bin/webpack --config ./webpack.dev.js --mode development && rm ./build/app.js && rm ./build/app.js.map",
+    "compile": "./node_modules/.bin/webpack --config ./webpack.dev.js --mode development && rm ./build/app.js && rm ./build/app.js.map && mkdir ./build/images && cp ./images/* ./build/images && cp ./config/minidapp.conf ./build",
     "watch": "./node_modules/.bin/webpack --config ./webpack.dev.js --watch --mode development",
-    "prod": "./node_modules/.bin/webpack --config ./webpack.prod.js --mode production && rm ./build/app.js",
+    "prod": "./node_modules/.bin/webpack --config ./webpack.prod.js --mode production && rm ./build/app.js && mkdir ./build/images && cp ./images/* ./build/images && cp ./config/minidapp.conf ./build",
     "test": "./node_modules/.bin/mocha",
     "start": "./node_modules/.bin/http-server -p 8080 build/"
   },

@@ -64,21 +64,21 @@ let theme = createMuiTheme ({
       fontWeight: 400,
       fontFamily: "\"Helvetica Neue\", \"Arial\", \"sans-serif\", \"Roboto\"",
       lineHeight: "1.5em",
-      color: '#38348B'
+      color: '#000000'
     },
     body1: {
       fontSize: "0.875rem",
       fontWeight: 400,
       fontFamily: "\"Helvetica Neue\", \"Arial\", \"sans-serif\", \"Roboto\"",
       lineHeight: "1.46429em",
-      color: '#38348B'
+      color: '#000000'
     },
     body2: {
       fontSize: "0.8rem",
       fontWeight: 400,
       fontFamily: "\"Helvetica Neue\", \"Arial\", \"sans-serif\", \"Roboto\"",
       lineHeight: "1.4em",
-      color: '#38348B'
+      color: '#000000'
     },
     caption: {
       fontSize: "0.75rem",
@@ -92,7 +92,7 @@ let theme = createMuiTheme ({
       textTransform: "uppercase",
       fontWeight: 500,
       fontFamily: "\"Helvetica Neue\", \"Arial\", \"sans-serif\", \"Roboto\"",
-      color: '#38348B'
+      color: '#000000'
     }
   },
   palette: {
@@ -101,14 +101,14 @@ let theme = createMuiTheme ({
       default: '#FFFFFF',
     },
     text: {
-      primary: "#38348B",
-      secondary: "#38348B"
+      primary: "#000000",
+      secondary: "#000000"
     },
     primary: {
-      main: '#38348B'
+      main: '#01acc6'
     },
     secondary: {
-      main: '#377D82'
+      main: '#ff671e'
     },
     error: red,
     warning: orange,
@@ -149,22 +149,22 @@ const themeStyles = makeStyles({
     textAlign: 'left',
   },
   header: {
-    padding: 0,
-    margin: 0,
+    padding: theme.spacing(2),
+    margin: theme.spacing(1),
     textAlign: 'center',
-    background: 'linear-gradient(#377D82, #377D82)'
+    background: 'linear-gradient(#27737e, #27737e)'
   },
   title: {
     padding: theme.spacing(1),
     margin: theme.spacing(1),
     textAlign: 'center',
-    background: 'linear-gradient(#38348B, #38348B)'
+    background: 'linear-gradient(#27737e, #27737e)'
   },
   subTitle: {
     padding: theme.spacing(1),
     margin: theme.spacing(1),
     textAlign: 'center',
-    background: 'linear-gradient(#38348B, #38348B)'
+    background: 'linear-gradient(#27737e, #27737e)'
   },
   content: {
     padding: theme.spacing(2),
@@ -176,14 +176,14 @@ const themeStyles = makeStyles({
     padding: theme.spacing(1),
     margin: theme.spacing(1),
     textAlign: 'center',
-    background: 'linear-gradient(#38348B, #38348B)'
+    background: 'linear-gradient(#27737e, #27737e)'
   },
   footer: {
     padding: theme.spacing(2),
     margin: theme.spacing(1),
     textAlign: 'center',
-    color: theme.palette.text.secondary,
-    background: 'linear-gradient(#377D82, #377D82)'
+    color: theme.palette.text.primary,
+    background: 'linear-gradient(#27737e, #27737e)'
   },
   button: {
     padding: theme.spacing(1),
@@ -193,13 +193,13 @@ const themeStyles = makeStyles({
     textAlign: 'right',
     textTransform: 'none',
     color: theme.palette.common.white,
-    background: 'linear-gradient(#38348B, #38348B)'
+    background: 'linear-gradient(#ff671e, #ff671e)'
   },
   menu: {
     padding: 0,
     margin: 0,
     textAlign: 'left',
-    background: 'linear-gradient(#38348B, #38348B)'
+    background: 'linear-gradient(#ff671e, #ff671e)'
   }
 })
 

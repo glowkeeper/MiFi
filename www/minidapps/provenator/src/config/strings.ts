@@ -1,8 +1,8 @@
 class App {
 
-  static readonly title='Zeus Ecosphere Ltd'
+  static readonly title='Minima'
   static readonly tagline=''
-  static readonly copyright='© Copyright 2020 Zeus Ecosphere Ltd'
+  static readonly copyright='© Copyright 2020 Minima GmbH'
   static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
 }
 
@@ -42,15 +42,15 @@ class Home {
 
 class About {
 
-  static readonly heading = 'About Zeus Ecosphere Ltd'
+  static readonly heading = 'About Provenator'
 
-  static readonly info = `**Zeus Ecosphere** version 0.0.1.<br /><br />Created by _${App.author}_`
+  static readonly info = `**Provenator** version 0.1.0.<br /><br />Created by _${App.author}_`
 
 }
 
 class Help {
 
-  static readonly heading = 'Zeus Ecosphere Help'
+  static readonly heading = 'Provenator Help'
 
   static readonly info = `I need some too`
 }
@@ -66,7 +66,7 @@ class Contact {
 
   static readonly heading = 'Contact'
 
-  static readonly info = `a dot person at zeus dot com`
+  static readonly info = `a dot person at minima dot global`
 }
 
 class File {
