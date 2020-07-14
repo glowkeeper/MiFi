@@ -13,7 +13,7 @@ import { App } from '../../config/strings'
 import { themeStyles } from '../../styles';
 
 import logo from '../../images/logo.png'
-import minima from '../../images/minima.png'
+import minimaLogo from '../../images/minimaLogo.png'
 
 export const Main = () => {
 
@@ -50,7 +50,7 @@ export const Main = () => {
           </Paper>
           <Paper className={classes.footer} square={true}>
                 <Grid item xs={12}>
-                  <img className={classes.logo} src={minima}/>
+                  <img className={classes.logo} src={minimaLogo}/>
                   <br/>
                   <Markdown escapeHtml={false} source={App.copyright} />
                 </Grid>

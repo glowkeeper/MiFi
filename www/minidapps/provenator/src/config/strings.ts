@@ -74,7 +74,7 @@ class File {
     static readonly headingFile = "Hash a File"
     static readonly getFile = "Get File"
     static readonly fileTip = "Select a file to be hashed"
-    static readonly fileName = "File name"
+    static readonly fileName = "Filename"
     static readonly hash = "Hash"
 }
 
