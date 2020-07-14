@@ -1,97 +1,71 @@
-import React, { useState, useEffect } from 'react'
+import React, { CSSProperties, useState } from 'react'
 import { connect } from 'react-redux'
 
-import shortid from 'shortid'
-import { ethers } from 'ethers'
+import { keccak256 } from 'js-sha3'
 
-import * as Yup from 'yup'
-
-import Select, {components} from 'react-select'
-import { Formik, Form, Field, FormikProps, ErrorMessage} from 'formik'
-import { LinearProgress, FormControl } from '@material-ui/core'
-import { TextField } from "material-ui-formik-components"
+import Tooltip from '@material-ui/core/Tooltip'
+import FileReaderInput from 'react-file-reader-input'
 
 import Grid from '@material-ui/core/Grid'
-import { Okay, OptionsStyles } from '../../styles'
-
 import RightCircleOutlined from '@ant-design/icons/lib/icons/RightCircleOutlined'
+import { Okay, OptionsStyles } from '../../styles'
 
 import { history, getString, getKey } from '../../utils'
 
-import { initialise as txInitialise } from '../../store/app/tx/actions'
-import { TxHelper } from '../../components/tx/apiTxHelper'
-
-import {
-    ApplicationState,
-    AppDispatch,
-    PayloadProps,
-    TxData } from '../../store/types'
-
 import { FormHelpers, GeneralError, Local, Misc, Transaction, File as FileConfig } from '../../config'
 
-const addFilSchema = Yup.object().shape({
-  file: Yup.string()
-    .required(`${GeneralError.errorRequired}`)
-})
+//type Props =  FileProps & FileDispatchProps
 
-interface FileProps {
-  info: TxData
+const inputStyle: CSSProperties = {
+  display: 'none',
 }
 
-interface FileDispatchProps {
-  txInit: () => void
-}
+export const GetFile = () => {
 
-type Props =  FileProps & FileDispatchProps
+    const [isLoading, setIsLoading] = useState(false)
+    const [fileName, setFileName] = useState("")
+    const [hash, setHash] = useState("")
 
-const File = (props: Props) => {
+    const getFile = (e: any, results: any) => {
+      //console.log(result)
+      results.forEach((result: any) => {
+        const [thisProgressEvent, file] = result
+        const buffer = Buffer.from(thisProgressEvent.target.result)
+        const hash = keccak256(buffer)
+        const fileName = file.name
+        setFileName(fileName)
+        setHash(hash)
+      })
+      setIsLoading(!isLoading)
+    }
 
-    const [isSubmitting, setSubmit] = useState(false)
-    const [summary, setSummary] = useState("")
-
-    useEffect(() => {
-
-        const txSummary: string = props.info.summary
-        if( isSubmitting && txSummary != summary ) {
-            setSummary(txSummary)
-            if( txSummary == Transaction.success || txSummary == Transaction.failure ) {
-                setSubmit(false)
-                setTimeout(() => {
-                    history.push(`${Local.home}`)
-                }, Misc.delay)
-            }
-        }
-    })
+    const setLoading = () => {
+        setFileName("")
+        setHash("")
+      setIsLoading(!isLoading)
+    }
 
     return (
       <>
         <h2>{FileConfig.headingFile}</h2>
         <hr />
-        <h3>{FileConfig.FileDetails}</h3>
-        <TxHelper/>
+        <FileReaderInput
+          as="binary"
+          id="fileInput"
+          onChange={getFile}
+        >
+            <Tooltip title={FileConfig.fileTip}>
+                <Okay onClick={setLoading} type='submit' variant="contained" color="primary" disabled={isLoading} endIcon={<RightCircleOutlined spin={isLoading}/>}>
+                  {FileConfig.getFile}
+                </Okay>
+            </Tooltip>
+        </FileReaderInput>
+        <p>
+            {FileConfig.fileName}: {fileName}
+        </p>
+        <p>
+            {FileConfig.hash}: {hash}
+        </p>
       </>
     )
 }
-
-//<Okay type='submit' variant="contained" color="primary" disabled={isSubmitting} endIcon={<RightCircleOutlined spin={isSubmitting}/>}>
-
-const mapStateToProps = (state: ApplicationState): FileProps => {
-  //console.log(state.orgReader)
-  return {
-    info: state.tx.data as TxData
-  }
-}
-
-const mapDispatchToProps = (dispatch: AppDispatch): FileDispatchProps => {
-  return {
-    txInit: () => dispatch(txInitialise())
-  }
-}
-
-//handleSubmit: (values: any) => void
-//handleSubmit: (values: any) => dispatch(addFile(values))
-
-export const FormFile = connect<FileProps, FileDispatchProps, {}, ApplicationState>(
-  mapStateToProps,
-  mapDispatchToProps
-)(File)

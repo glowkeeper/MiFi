@@ -71,8 +71,11 @@ class Contact {
 
 class File {
 
-    static readonly headingFile = "File"
-    static readonly FileDetails = "Details"
+    static readonly headingFile = "Hash a File"
+    static readonly getFile = "Get File"
+    static readonly fileTip = "Select a file to be hashed"
+    static readonly fileName = "File name"
+    static readonly hash = "Hash"
 }
 
 export { App,
