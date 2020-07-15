@@ -8,16 +8,15 @@ import { ThemeProvider } from '@material-ui/styles'
 
 import { theme } from '../styles'
 import { Main } from './pages/main'
-
 // @ts-ignore
-import minima from './minima'
+import { Minima } from './minima'
 
-window.addEventListener("load", function(){
-    //Listen for Minima Events
-    window.addEventListener('MinimaEvent', function(evt) {})
-    console.log("initialising minima")
-    minima.init()
-    console.log("done initialising minima")
+// Test Minima
+//Listen for Minima Events
+window.addEventListener('MinimaEvent', function(evt) {})
+Minima.init()
+Minima.cmd("random", function(json: any) {
+    console.log("Minima randon: ", json.response.random)
 })
 
 const Root = ({ store }: any) => (
