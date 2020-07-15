@@ -28,17 +28,6 @@ import { themeStyles, MainMenu, MainMenuItem } from '../../styles'
 
 import { Paths, Local } from '../../config'
 
-const URLLink = ({ url, children }: any) => (
-  <NavLink
-    to={url = `${url}`}
-    activeStyle={{
-        fontWeight: "bold"
-    }}
-  >
-    {children}
-  </NavLink>
-)
-
 export const Main = () => {
 
   const [anchorEl, setAnchorEl] = React.useState(null)
@@ -47,11 +36,11 @@ export const Main = () => {
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
-  };
+  }
 
   const handleClose = () => {
     setAnchorEl(null);
-  };
+  }
 
   return (
      <div>
@@ -69,50 +58,50 @@ export const Main = () => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
         >
-            <URLLink url={Local.home}>
+            <NavLink to={Local.home}>
               <MainMenuItem onClick={handleClose}>
                   <ListItemIcon>
                     <HomeIcon/>
                   </ListItemIcon>
                   <ListItemText primary={Paths.home} />
               </MainMenuItem>
-            </URLLink>
+            </NavLink>
 
-            <URLLink url={Local.about}>
+            <NavLink to={Local.about}>
                 <MainMenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <InfoIcon/>
                     </ListItemIcon>
                     <ListItemText primary={Paths.about} />
                 </MainMenuItem>
-            </URLLink>
+            </NavLink>
 
-            <URLLink url={Local.help}>
+            <NavLink to={Local.help}>
                 <MainMenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <HelpIcon/>
                     </ListItemIcon>
                     <ListItemText primary={Paths.help} />
                 </MainMenuItem>
-            </URLLink>
+            </NavLink>
 
-            <URLLink url={Local.faq}>
+            <NavLink to={Local.faq}>
                 <MainMenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <QuestionAnswerIcon/>
                     </ListItemIcon>
                     <ListItemText primary={Paths.faq} />
                 </MainMenuItem>
-            </URLLink>
+            </NavLink>
 
-            <URLLink url={Local.contact}>
+            <NavLink to={Local.contact}>
                 <MainMenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <ContactMailIcon/>
                     </ListItemIcon>
                     <ListItemText primary={Paths.contact} />
                 </MainMenuItem>
-            </URLLink>
+            </NavLink>
         </MainMenu>
     </div>
   )
