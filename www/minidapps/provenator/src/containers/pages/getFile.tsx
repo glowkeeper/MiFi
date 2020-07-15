@@ -1,7 +1,8 @@
 import React, { CSSProperties, useState } from 'react'
 import { connect } from 'react-redux'
 
-import { keccak256 } from 'js-sha3'
+//import MD5 from 'crypto-js/md5'
+import SparkMD5 from 'spark-md5'
 
 import Tooltip from '@material-ui/core/Tooltip'
 import FileReaderInput from 'react-file-reader-input'
@@ -27,22 +28,55 @@ export const GetFile = () => {
     const [hash, setHash] = useState("")
 
     const getFile = (e: any, results: any) => {
-      //console.log(result)
-      results.forEach((result: any) => {
-        const [thisProgressEvent, file] = result
-        const buffer = Buffer.from(thisProgressEvent.target.result)
-        const hash = keccak256(buffer)
-        const fileName = file.name
-        setFileName(fileName)
-        setHash(hash)
-      })
-      setIsLoading(!isLoading)
+
+        //console.log(results)
+
+        //results.forEach((result: any) => {
+
+        //console.log(result)
+        const [load, file] = results[0]
+        setFileName(file.name)
+
+        const blobSlice = File.prototype.slice
+        const chunkSize = 2097152                             // Read in chunks of 2MB
+        const chunks = Math.ceil(file.size / chunkSize)
+        let currentChunk = 0
+        let spark = new SparkMD5.ArrayBuffer()
+        const fileReader = new FileReader()
+
+        fileReader.onload = function (e) {
+            //console.log('read chunk nr', currentChunk + 1, 'of', chunks);
+            spark.append(e.target!.result as ArrayBuffer)                   // Append array buffer
+            currentChunk++
+
+            if (currentChunk < chunks) {
+                loadNext()
+            } else {
+                // Compute hash
+                setHash(spark.end())
+                setIsLoading(false)
+            }
+        }
+
+        fileReader.onerror = () => {
+            setIsLoading(false)
+            console.warn('oops, something went wrong')
+        }
+
+        const loadNext = () => {
+            const start = currentChunk * chunkSize
+            const end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize
+            fileReader.readAsArrayBuffer(blobSlice.call(file, start, end))
+        }
+
+        loadNext()
+      //})
     }
 
     const setLoading = () => {
         setFileName("")
         setHash("")
-      setIsLoading(!isLoading)
+        setIsLoading(!isLoading)
     }
 
     return (
