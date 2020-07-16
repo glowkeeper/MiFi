@@ -1,7 +1,6 @@
-import React, { CSSProperties, useState } from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+//import { connect } from 'react-redux'
 
-//import MD5 from 'crypto-js/md5'
 import SparkMD5 from 'spark-md5'
 
 import Tooltip from '@material-ui/core/Tooltip'
@@ -11,15 +10,11 @@ import Grid from '@material-ui/core/Grid'
 import RightCircleOutlined from '@ant-design/icons/lib/icons/RightCircleOutlined'
 import { Okay, OptionsStyles } from '../../styles'
 
-import { history, getString, getKey } from '../../utils'
+//import { history, getString, getKey } from '../../utils'
 
 import { FormHelpers, GeneralError, Local, Misc, Transaction, File as FileConfig } from '../../config'
 
 //type Props =  FileProps & FileDispatchProps
-
-const inputStyle: CSSProperties = {
-  display: 'none',
-}
 
 export const GetFile = () => {
 
