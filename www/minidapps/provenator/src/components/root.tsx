@@ -16,7 +16,7 @@ import { Minima } from './minima'
 window.addEventListener('MinimaEvent', function(evt) {})
 Minima.init()
 Minima.cmd("random", function(json: any) {
-    console.log("Minima randon: ", json.response.random)
+    console.log("Minima random: ", json.response.random)
 })
 
 const Root = ({ store }: any) => (
