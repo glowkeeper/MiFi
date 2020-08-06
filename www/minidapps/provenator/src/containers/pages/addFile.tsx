@@ -32,8 +32,6 @@ import {
     TxData,
     FileProps } from '../../store/types'
 
-//type Props =  FileProps & FileDispatchProps
-
 const addFileSchema = Yup.object().shape({
   fileHash: Yup.string()
     .required(`${GeneralError.required}`)
@@ -181,7 +179,6 @@ export const getFile = (props: Props) => {
 
 
 const mapStateToProps = (state: ApplicationState): TxProps => {
-  //console.log(state.orgReader)
   return {
     info: state.tx.data as TxData
   }
