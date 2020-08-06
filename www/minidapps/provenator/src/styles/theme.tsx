@@ -201,7 +201,7 @@ const themeStyles = makeStyles({
     textAlign: 'right',
     textTransform: 'none',
     color: theme.palette.common.white,
-    background: 'linear-gradient(#ff671e, #ff671e)'
+    background: 'linear-gradient(#929396, #929396)'
   },
   menu: {
     padding: 0,

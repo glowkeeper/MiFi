@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 export const MainMenu = withStyles({
   paper: {
-    background:  'linear-gradient(#377D82, #377D82)',
+    background:  'linear-gradient(#00abc7, #00abc7)',
     border: '1px solid #d3d4d5',
   },
 })((props: any) => (
@@ -27,38 +27,6 @@ export const MainMenu = withStyles({
 ))
 
 export const MainMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem)
-
-export const AppMenu = withStyles({
-  paper: {
-    background:  'linear-gradient(#377D82, #377D82)',
-    border: '1px solid #d3d4d5',
-  },
-})((props: any) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-))
-
-export const AppMenuItem = withStyles((theme) => ({
   root: {
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
