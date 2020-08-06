@@ -46,6 +46,15 @@ export interface InfoData {
   contact: InfoProps
 }
 
+// Extra info stuff
+export interface FileProps {
+    fileHash: string
+}
+
+export interface FileInfoProps {
+    fileInfo: Array<FileProps>
+}
+
 //Tx stuff
 export interface TxData {
   code: number

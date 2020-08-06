@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { GetFile } from '../../containers/pages/'
+import { AddFile } from '../../containers/pages'
 
 import { themeStyles } from '../../styles'
 
@@ -12,7 +12,7 @@ export const Home = () => {
 
   return (
      <>
-         <GetFile />
+         <AddFile />
     </>
 
   )

@@ -21,7 +21,7 @@ class Paths {
 
 class GeneralError {
 
-    static readonly errorRequired = "Required"
+    static readonly required = "Required"
 }
 
 class Transaction {
@@ -76,6 +76,9 @@ class File {
     static readonly fileTip = "Select a file to be hashed"
     static readonly fileName = "Filename"
     static readonly hash = "Hash"
+    static readonly submitTip = "Submit the hash of the file to the Minima blockchain"
+
+    static readonly addFileButton = "Submit to Minima"
 }
 
 export { App,
