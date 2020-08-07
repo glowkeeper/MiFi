@@ -19,6 +19,12 @@ class Paths {
   static readonly file = 'File'
 }
 
+
+class Blockchain {
+
+  static heading = 'Blockchain Data'
+}
+
 class GeneralError {
 
     static readonly required = "Required"
@@ -83,6 +89,7 @@ class File {
 
 export { App,
          Paths,
+         Blockchain,
          GeneralError,
          Transaction,
          Home,

@@ -3,14 +3,14 @@ import ReduxThunk from 'redux-thunk'
 
 import { ApplicationState, ActionProps } from './types'
 
-import { reducer as txReducer } from './app/reducers/put/reducer'
+import { reducer as chainReducer } from './app/reducers/blockchain/info/reducer'
 import { reducer as infoReducer } from './app/reducers/info/reducer'
 import { reducer as dataReducer } from './app/reducers/get/data/reducer'
 
 
 export const rootReducer: Reducer<ApplicationState, ActionProps> = combineReducers<ApplicationState, ActionProps>({
+  chainInfo: chainReducer,
   info: infoReducer,
-  tx: txReducer,
   data: dataReducer
 })
 

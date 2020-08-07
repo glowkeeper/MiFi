@@ -8,16 +8,6 @@ import { ThemeProvider } from '@material-ui/styles'
 
 import { theme } from '../styles'
 import { Main } from './pages/main'
-// @ts-ignore
-import { Minima } from './minima'
-
-// Test Minima
-//Listen for Minima Events
-window.addEventListener('MinimaEvent', function(evt) {})
-Minima.init()
-Minima.cmd("random", function(json: any) {
-    console.log("Minima random: ", json.response.random)
-})
 
 const Root = ({ store }: any) => (
     <Provider store={store}>

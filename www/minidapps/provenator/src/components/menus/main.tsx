@@ -67,6 +67,15 @@ export const Main = () => {
               </MainMenuItem>
             </NavLink>
 
+            <NavLink to={Local.blockchain}>
+                <MainMenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                      <PermDataSettingIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={Paths.blockchain} />
+                </MainMenuItem>
+            </NavLink>
+
             <NavLink to={Local.about}>
                 <MainMenuItem onClick={handleClose}>
                     <ListItemIcon>

@@ -4,7 +4,7 @@ import Markdown from 'react-markdown'
 
 import Grid from '@material-ui/core/Grid'
 
-import { ApplicationState, InfoProps, InfoTypes } from '../../../store/types'
+import { ApplicationState, InfoProps, InfoTypes } from '../../store/types'
 
 interface StateProps {
   type: InfoTypes

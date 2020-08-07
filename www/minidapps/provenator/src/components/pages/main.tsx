@@ -1,4 +1,7 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+
+import { ChainInit } from '../blockchain/blockchain'
 
 import Markdown from 'react-markdown'
 import Grid from '@material-ui/core/Grid'
@@ -10,18 +13,22 @@ import { Main as MainMenu } from '../menus'
 import { Content } from '../content'
 import { App } from '../../config/strings'
 
-import { themeStyles } from '../../styles';
+import { themeStyles } from '../../styles'
 
 import logo from '../../images/logo.png'
 import minimaLogo from '../../images/minimaLogo.png'
 
 export const Main = () => {
 
+  const dispatch = useDispatch()
+  ChainInit(dispatch)
+
   const classes = themeStyles()
 
   return (
       <div className={classes.root}>
         <Grid container className={classes.grid}>
+
           <Paper className={classes.header} square={true}>
             <Grid item container xs={12}>
                 <Grid item xs={1}>
@@ -35,6 +42,7 @@ export const Main = () => {
                 </Grid>
             </Grid>
           </Paper>
+
           <Paper className={classes.content} square={true}>
             <Grid item container xs={12}>
                <Grid item xs={3}>
@@ -48,6 +56,7 @@ export const Main = () => {
                 </Grid>
             </Grid>
           </Paper>
+
           <Paper className={classes.footer} square={true}>
                 <Grid item xs={12}>
                   <img className={classes.logo} src={minimaLogo}/>
@@ -55,6 +64,7 @@ export const Main = () => {
                   <Markdown escapeHtml={false} source={App.copyright} />
                 </Grid>
           </Paper>
+
         </Grid>
       </div>
   )
