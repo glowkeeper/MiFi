@@ -1,15 +1,17 @@
 class App {
 
-  static readonly title='Minima'
-  static readonly tagline=''
-  static readonly copyright='© Copyright 2020 Minima GmbH'
-  static readonly author='[Steven Huckle](https://glowkeeper.github.io/)'
+  static readonly appName = 'Provenator'
+  static readonly title = 'Minima'
+  static readonly tagline = ''
+  static readonly copyright = '© Copyright 2020 Minima GmbH'
+  static readonly author = '[Steven Huckle](https://glowkeeper.github.io/)'
 }
 
 class Paths {
 
   // AppBar
   static readonly home = 'Home'
+  static readonly addFile = 'Hash File'
   static readonly blockchain = 'Blockchain'
   static readonly about = 'About'
   static readonly help = 'Help'
@@ -43,14 +45,14 @@ class Home {
 
   static readonly heading = 'Home'
 
-  static readonly info = `Every new website should start with \"Hello World!\"`
+  static readonly info = `Use **${App.appName}** to help prove the provenance of your digital assets. Select _${Paths.addFile}_ from the menu to add an asset now.`
 }
 
 class About {
 
   static readonly heading = 'About Provenator'
 
-  static readonly info = `**Provenator** version 0.1.0.<br /><br />Created by _${App.author}_`
+  static readonly info = `**${App.appName}** version 0.1.0.<br /><br />Created by _${App.author}_`
 
 }
 
