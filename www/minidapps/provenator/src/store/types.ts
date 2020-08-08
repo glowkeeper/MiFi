@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 export interface ApplicationState {
   chainInfo: ChainDataProps,
   info: InfoPageProps
-  data: GetProps
+  tx: TransactionProps
 }
 
 export interface PayloadProps {
@@ -54,6 +54,18 @@ export interface InfoData {
   contact: InfoProps
 }
 
+
+//Tx stuff
+export interface TxData {
+  key: string
+  summary: string
+  info: object
+}
+
+export interface TransactionProps extends PayloadProps {
+  data: TxData
+}
+
 // Extra info stuff
 export interface FileProps {
     fileHash: string
@@ -63,20 +75,7 @@ export interface FileInfoProps {
     fileInfo: Array<FileProps>
 }
 
-// Get data stuff
-export type DataProps = object
-
-export interface GetProps extends PayloadProps {
-    data: Array<DataProps>
-}
-
-// Actiontypes stuff
-export const enum GetActionTypes {
-  GET_INIT = '@@GetActionTypes/GET_INIT',
-  GET_SUCCESS = '@@GetActionTypes/GET_SUCCESS',
-  GET_FAILURE = '@@GetActionTypes/GET_FAILURE'
-}
-
+// Action types
 export const enum TransactionActionTypes {
   TRANSACTION_INIT = '@@TransactionActionTypes/TRANSACTION_INIT',
   TRANSACTION_PENDING = '@@TransactionActionTypes/TRANSACTION_PENDING',

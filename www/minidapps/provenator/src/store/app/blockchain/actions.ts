@@ -1,5 +1,7 @@
 import { write } from '../../actions'
-import { AppDispatch, ChainDataProps, ChainDataActionTypes } from '../../types'
+import { AppDispatch, ChainDataProps, ChainDataActionTypes, TransactionActionTypes, FileProps } from '../../types'
+
+import { Transaction } from '../../../config'
 
 // @ts-ignore
 import { Minima } from './minima'
@@ -20,7 +22,7 @@ export const init = () => {
 export const addAddress = () => {
     return async (dispatch: AppDispatch) => {
 
-      //this.data.script = "ASSERT FLOOR ( @AMOUNT ) EQ @AMOUNT LET checkout = 0 WHILE ( checkout LT @TOTOUT ) DO IF GETOUTTOK ( checkout ) EQ @TOKENID THEN LET outamt = GETOUTAMT ( checkout ) ASSERT FLOOR ( outamt ) EQ outamt ENDIF LET checkout = INC ( checkout ) ENDWHILE RETURN TRUE";
+
 
         let chainData:  ChainDataProps = {
           data: {
@@ -42,4 +44,47 @@ export const addAddress = () => {
 
         dispatch(write({data: chainData.data})(ChainDataActionTypes.ADD_DATA))
     }
+}
+
+export const addFile = (props: FileProps) => {
+  return async (dispatch: AppDispatch) => {
+
+        const txnId = Math.floor(Math.random()*1000000000)
+        const time = new Date(Date.now()).toString()
+
+        Minima.cmd("keys", function( json: any ) {
+
+            if( json.status ) {
+
+                //console.log(json)
+                const key = json.response.publickeys[0].publickey
+                //console.log(key)
+
+                let txData = {
+                    key: key,
+                    summary: `${Transaction.pending}`,
+                    info: {
+                        time: time
+                    }
+                }
+                dispatch(write({data: txData})(TransactionActionTypes.TRANSACTION_PENDING))
+
+                const addFileScript = "txncreate " +txnId+ ";" +
+                                      "txnstate " + txnId + " 0 "  + props.fileHash + ";" +
+                                      "txnstate " + txnId +" 1 " + time + ";" +
+                                      "txnsign " + txnId + " " + key + ";" +
+                                      "txnpost " + txnId + ";" +
+                                      "txndelete " + txnId + ";"
+
+                Minima.cmd( addFileScript , function( resp: any ){
+                  console.log(resp)
+                  txData.summary = `${Transaction.success}`
+                  dispatch(write({data: txData})(TransactionActionTypes.TRANSACTION_SUCCESS))
+                })
+            }
+        })
+
+      //Post it..
+
+  }
 }

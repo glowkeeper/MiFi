@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import SparkMD5 from 'spark-md5'
@@ -16,28 +16,37 @@ import Grid from '@material-ui/core/Grid'
 import RightCircleOutlined from '@ant-design/icons/lib/icons/RightCircleOutlined'
 import { Okay, OptionsStyles } from '../../styles'
 
-import { addFile } from '../../store/app/put/actions'
+import { addFile } from '../../store/app/blockchain'
+import { initialise as txInitialise } from '../../store/app/tx/actions'
 
 import { history } from '../../utils'
 
-import { FormHelpers, GeneralError, Local, Misc, File as FileConfig } from '../../config'
+import { FormHelpers, GeneralError, Transaction, Local, Misc, File as FileConfig } from '../../config'
 
 import {
     ApplicationState,
     AppDispatch,
-    PayloadProps,
-    FileProps } from '../../store/types'
+    FileProps,
+    TxData } from '../../store/types'
+
+import { TxHelper } from '../../components/tx/txHelper'
 
 const addFileSchema = Yup.object().shape({
   fileHash: Yup.string()
     .required(`${GeneralError.required}`)
 })
 
+
+interface FileStateProps {
+  info: TxData
+}
+
 interface FileDispatchProps {
+  initialise: () => void
   handleSubmit: (values: FileProps) => void
 }
 
-type Props =  FileDispatchProps
+type Props =  FileDispatchProps & FileStateProps
 
 export const getFile = (props: Props) => {
 
@@ -45,6 +54,22 @@ export const getFile = (props: Props) => {
     const [fileName, setFileName] = useState("")
     const [hash, setHash] = useState("")
     const [isSubmitting, setSubmit] = useState(false)
+    const [summary, setSummary] = useState("")
+
+    useEffect(() => {
+
+        const txSummary: string = props.info.summary
+        if( isSubmitting && txSummary != summary ) {
+            setSummary(txSummary)
+            if( txSummary == Transaction.success || txSummary == Transaction.failure ) {
+                setSubmit(false)
+                setTimeout(() => {
+                    history.push(`${Local.home}`)
+                }, Misc.delay)
+            }
+        }
+
+    }, [props.info])
 
     const getFile = (e: any, results: any) => {
 
@@ -78,6 +103,7 @@ export const getFile = (props: Props) => {
         }
 
         const loadNext = () => {
+
             const start = currentChunk * chunkSize
             const end = ((start + chunkSize) >= file.size) ? file.size : start + chunkSize
             fileReader.readAsArrayBuffer(blobSlice.call(file, start, end))
@@ -116,7 +142,10 @@ export const getFile = (props: Props) => {
           enableReinitialize={true}
           validationSchema={addFileSchema}
           onSubmit={(values: any) => {
+
             setSubmit(true)
+            props.initialise()
+
             const fileInfo: FileProps = {
                 fileHash: hash,
             }
@@ -147,17 +176,27 @@ export const getFile = (props: Props) => {
             </Form>
         )}
         </Formik>
+        <TxHelper/>
       </>
     )
 }
 
+
+const mapStateToProps = (state: ApplicationState): FileStateProps => {
+  //console.log(state.orgReader)
+  return {
+    info: state.tx.data as TxData,
+  }
+}
+
 const mapDispatchToProps = (dispatch: AppDispatch): FileDispatchProps => {
   return {
+    initialise: () => dispatch(txInitialise()),
     handleSubmit: (values: FileProps) => dispatch(addFile(values))
   }
 }
 
-export const AddFile = connect<{}, FileDispatchProps, {}, ApplicationState>(
-  null,
+export const AddFile = connect<FileStateProps, FileDispatchProps, {}, ApplicationState>(
+  mapStateToProps,
   mapDispatchToProps
 )(getFile)
