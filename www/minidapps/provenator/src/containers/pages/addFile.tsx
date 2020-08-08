@@ -22,7 +22,6 @@ import { history } from '../../utils'
 
 import { FormHelpers, GeneralError, Local, Misc, File as FileConfig } from '../../config'
 
-
 import {
     ApplicationState,
     AppDispatch,

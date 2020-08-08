@@ -1,14 +1,12 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-
-import { ChainInit } from '../blockchain/blockchain'
 
 import Markdown from 'react-markdown'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import { sizing } from '@material-ui/system'
 
-//import { App as AppMenu, Main as MainMenu } from '../menus'
+import { ChainInit } from '../blockchain/blockchain'
+
 import { Main as MainMenu } from '../menus'
 import { Content } from '../content'
 import { App } from '../../config/strings'
@@ -19,9 +17,6 @@ import logo from '../../images/logo.png'
 import minimaLogo from '../../images/minimaLogo.png'
 
 export const Main = () => {
-
-  const dispatch = useDispatch()
-  ChainInit(dispatch)
 
   const classes = themeStyles()
 
@@ -35,7 +30,7 @@ export const Main = () => {
                     <MainMenu />
                 </Grid>
                 <Grid item xs={10}>
-                    &nbsp;
+                    <ChainInit />
                 </Grid>
                 <Grid item xs={1}>
                     <img className={classes.logo} src={logo}/>
