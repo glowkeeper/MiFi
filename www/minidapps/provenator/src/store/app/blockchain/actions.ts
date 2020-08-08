@@ -22,8 +22,6 @@ export const init = () => {
 export const addAddress = () => {
     return async (dispatch: AppDispatch) => {
 
-
-
         let chainData:  ChainDataProps = {
           data: {
             hexAccount: '',
@@ -62,10 +60,8 @@ export const addFile = (props: FileProps) => {
 
                 let txData = {
                     key: key,
-                    summary: `${Transaction.pending}`,
-                    info: {
-                        time: time
-                    }
+                    summary: Transaction.pending,
+                    time: time
                 }
                 dispatch(write({data: txData})(TransactionActionTypes.TRANSACTION_PENDING))
 
@@ -76,15 +72,26 @@ export const addFile = (props: FileProps) => {
                                       "txnpost " + txnId + ";" +
                                       "txndelete " + txnId + ";"
 
-                Minima.cmd( addFileScript , function( resp: any ){
-                  console.log(resp)
-                  txData.summary = `${Transaction.success}`
-                  dispatch(write({data: txData})(TransactionActionTypes.TRANSACTION_SUCCESS))
-                })
+                Minima.cmd( addFileScript , function( resp: any ) {
+
+                    console.log(resp)
+                    let len = resp.length;
+    				for( var i=0; i < resp.length; i++) {
+
+                        if(resp[i].status != true) {
+
+    						console.log(resp[i].message)
+                            txData.summary = Transaction.failure
+                            dispatch(write({data: txData})(TransactionActionTypes.TRANSACTION_FAILURE))
+
+    					} else {
+
+                            txData.summary = Transaction.success
+                            dispatch(write({data: txData})(TransactionActionTypes.TRANSACTION_SUCCESS))
+                        }
+    				}
+        		})
             }
         })
-
-      //Post it..
-
   }
 }

@@ -59,7 +59,7 @@ export interface InfoData {
 export interface TxData {
   key: string
   summary: string
-  info: object
+  time: string
 }
 
 export interface TransactionProps extends PayloadProps {

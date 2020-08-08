@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
+import Markdown from 'react-markdown'
+
 import SparkMD5 from 'spark-md5'
 
 import * as Yup from 'yup'
@@ -19,7 +21,7 @@ import { Okay, OptionsStyles } from '../../styles'
 import { addFile } from '../../store/app/blockchain'
 import { initialise as txInitialise } from '../../store/app/tx/actions'
 
-import { history } from '../../utils'
+import { history, getDictEntries } from '../../utils'
 
 import { FormHelpers, GeneralError, Transaction, Local, Misc, File as FileConfig } from '../../config'
 
@@ -27,9 +29,10 @@ import {
     ApplicationState,
     AppDispatch,
     FileProps,
+    PayloadProps,
     TxData } from '../../store/types'
 
-import { TxHelper } from '../../components/tx/txHelper'
+//import { TxHelper } from '../../components/tx/txHelper'
 
 const addFileSchema = Yup.object().shape({
   fileHash: Yup.string()
@@ -38,7 +41,7 @@ const addFileSchema = Yup.object().shape({
 
 
 interface FileStateProps {
-  info: TxData
+  info: PayloadProps
 }
 
 interface FileDispatchProps {
@@ -54,19 +57,20 @@ export const getFile = (props: Props) => {
     const [fileName, setFileName] = useState("")
     const [hash, setHash] = useState("")
     const [isSubmitting, setSubmit] = useState(false)
-    const [summary, setSummary] = useState("")
+    const [info, setInfo] = useState("")
 
     useEffect(() => {
 
-        const txSummary: string = props.info.summary
-        if( isSubmitting && txSummary != summary ) {
-            setSummary(txSummary)
-            if( txSummary == Transaction.success || txSummary == Transaction.failure ) {
-                setSubmit(false)
-                setTimeout(() => {
-                    history.push(`${Local.home}`)
-                }, Misc.delay)
-            }
+        const txData: TxData = props.info.data as TxData
+        const txSummary = txData.summary
+        //console.log("here! ",  info.summary, txSummary, isSubmitting )
+        const infoData = getDictEntries(props.info)
+        setInfo( infoData )
+        if( txSummary == Transaction.success || txSummary == Transaction.failure ) {
+            setSubmit(false)
+            setTimeout(() => {
+                history.push(`${Local.home}`)
+            }, Misc.delay)
         }
 
     }, [props.info])
@@ -176,7 +180,8 @@ export const getFile = (props: Props) => {
             </Form>
         )}
         </Formik>
-        <TxHelper/>
+        <hr />
+        <Markdown escapeHtml={false} source={info} />
       </>
     )
 }
@@ -185,7 +190,7 @@ export const getFile = (props: Props) => {
 const mapStateToProps = (state: ApplicationState): FileStateProps => {
   //console.log(state.orgReader)
   return {
-    info: state.tx.data as TxData,
+    info: state.tx as PayloadProps,
   }
 }
 

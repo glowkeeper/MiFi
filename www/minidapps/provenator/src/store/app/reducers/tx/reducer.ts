@@ -4,12 +4,13 @@ const initialState: TransactionProps = {
   data: {
     key: "",
     summary: "",
-    info: {}
+    time: ""
   }
 }
 
 export const reducer = (state: TransactionProps = initialState, action: ActionProps): TransactionProps => {
 
+  //console.log( action )
   switch (action.type) {
     case TransactionActionTypes.TRANSACTION_INIT: {
       const data = (action.payload as TransactionProps)

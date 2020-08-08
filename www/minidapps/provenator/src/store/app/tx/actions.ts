@@ -6,7 +6,7 @@ export const initialise = () => {
     const initData: TxData = {
         key: "",
         summary: "",
-        info: {}
+        time: ""
     }
     await dispatch(write({data: initData})(TransactionActionTypes.TRANSACTION_INIT))
   }
