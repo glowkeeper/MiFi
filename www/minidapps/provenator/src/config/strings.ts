@@ -82,7 +82,7 @@ class File {
     static readonly fileTip = "Select a file to be hashed"
     static readonly fileName = "Filename"
     static readonly hash = "Hash"
-    static readonly submitTip = "Submit the hash of the file to the Minima blockchain"
+    static readonly submitTip = "Submit the hash of the file to the Minima blockchain. The key returned is that used to sign the submitted transaction"
 
     static readonly addFileButton = "Submit to Minima"
 }
