@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import Markdown from 'react-markdown'
@@ -53,6 +53,7 @@ type Props =  FileDispatchProps & FileStateProps
 
 export const getFile = (props: Props) => {
 
+    let isFirstRun = useRef(true)
     const [isLoading, setIsLoading] = useState(false)
     const [fileName, setFileName] = useState("")
     const [hash, setHash] = useState("")
@@ -61,16 +62,21 @@ export const getFile = (props: Props) => {
 
     useEffect(() => {
 
-        const txData: TxData = props.info.data as TxData
-        const txSummary = txData.summary
-        //console.log("here! ",  info.summary, txSummary, isSubmitting )
-        const infoData = getDictEntries(props.info)
-        setInfo( infoData )
-        if( txSummary == Transaction.success || txSummary == Transaction.failure ) {
-            setSubmit(false)
-            setTimeout(() => {
-                history.push(`${Local.home}`)
-            }, Misc.delay)
+        // Stop "Key, summary, time" (info) rendering on first run
+        if ( isFirstRun.current ) {
+
+            isFirstRun.current = false
+
+        } else {
+
+            const txData: TxData = props.info.data as TxData
+            const txSummary = txData.summary
+            //console.log("here! ",  info.summary, txSummary, isSubmitting )
+            const infoData = getDictEntries(props.info)
+            setInfo( infoData )
+            if( txSummary == Transaction.success || txSummary == Transaction.failure ) {
+                setSubmit(false)
+            }
         }
 
     }, [props.info])
@@ -103,7 +109,7 @@ export const getFile = (props: Props) => {
 
         fileReader.onerror = () => {
             setIsLoading(false)
-            console.warn('oops, something went wrong')
+            console.warn(`${FileConfig.loadingError}`)
         }
 
         const loadNext = () => {

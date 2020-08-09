@@ -13,11 +13,13 @@ export const Content = () => {
     return (
 
       <Switch>
-        <Route name={Paths.blockchain} exact path={Local.blockchain} render= {() => <BlockchainInfo />} />
-        <Route name={Paths.about} exact path={Local.help} render={() => <Info type={InfoTypes.HELP}/>} />
-        <Route name={Paths.faq} exact path={Local.faq} render={() => <Info type={InfoTypes.FAQ}/>} />
+
+        <Route name={Paths.help} exact path={Local.help} render={() => <Info type={InfoTypes.HELP}/>} />
         <Route name={Paths.contact} exact path={Local.contact} render={() => <Info type={InfoTypes.CONTACT}/>} />
+        <Route name={Paths.about} exact path={Local.about} render={() => <Info type={InfoTypes.ABOUT}/>} />
+        <Route name={Paths.blockchain} exact path={Local.blockchain} render= {() => <BlockchainInfo />} />
         <Route name={Paths.home} path={Local.home} render= {() => <AddFile />} />
+        
       </Switch>
     )
 }

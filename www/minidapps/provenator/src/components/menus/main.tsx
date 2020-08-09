@@ -68,39 +68,12 @@ export const Main = () => {
               </MainMenuItem>
             </NavLink>
 
-            <NavLink to={Local.blockchain}>
-                <MainMenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <PermDataSettingIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={Paths.blockchain} />
-                </MainMenuItem>
-            </NavLink>
-
-            <NavLink to={Local.about}>
-                <MainMenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <InfoIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={Paths.about} />
-                </MainMenuItem>
-            </NavLink>
-
             <NavLink to={Local.help}>
                 <MainMenuItem onClick={handleClose}>
                     <ListItemIcon>
                       <HelpIcon/>
                     </ListItemIcon>
                     <ListItemText primary={Paths.help} />
-                </MainMenuItem>
-            </NavLink>
-
-            <NavLink to={Local.faq}>
-                <MainMenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <QuestionAnswerIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary={Paths.faq} />
                 </MainMenuItem>
             </NavLink>
 
@@ -111,7 +84,26 @@ export const Main = () => {
                     </ListItemIcon>
                     <ListItemText primary={Paths.contact} />
                 </MainMenuItem>
+            </NavLink>            
+
+            <NavLink to={Local.about}>
+                <MainMenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                      <InfoIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={Paths.about} />
+                </MainMenuItem>
             </NavLink>
+
+            <NavLink to={Local.blockchain}>
+                <MainMenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                      <PermDataSettingIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={Paths.blockchain} />
+                </MainMenuItem>
+            </NavLink>
+
         </MainMenu>
     </div>
   )

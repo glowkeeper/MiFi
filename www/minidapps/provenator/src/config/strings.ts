@@ -45,7 +45,7 @@ class Home {
 
   static readonly heading = 'Home'
 
-  static readonly info = `Use **${App.appName}** to help prove the provenance of your digital assets. Select _${Paths.addFile}_ from the menu to add an asset now.`
+  static readonly info = `**${App.appName}**`
 }
 
 class About {
@@ -60,7 +60,7 @@ class Help {
 
   static readonly heading = 'Provenator Help'
 
-  static readonly info = `I need some too`
+  static readonly info = `Use **${App.appName}** to help prove the provenance of your digital assets. Select _${Paths.addFile}_ from the menu to add an asset **now**.`
 }
 
 class Faq {
@@ -85,6 +85,7 @@ class File {
     static readonly fileName = "Filename"
     static readonly hash = "Hash"
     static readonly submitTip = "Submit the hash of the file to the Minima blockchain. The key returned is that used to sign the submitted transaction"
+    static readonly loadingError = "File did not load"
 
     static readonly addFileButton = "Submit to Minima"
 }
